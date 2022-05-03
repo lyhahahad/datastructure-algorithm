@@ -118,3 +118,32 @@ void append(struct Node** head_ref, int new_data)
     return;   
 }
 //맨 뒤에 추가할 경우 마지막 노드를 찾아야 하기 때문에 o(n)이 소요된다.
+
+void deleteNode(struct Node** head_ref, int key)
+{
+    // Store head node
+    struct Node *temp = *head_ref, *prev;
+ 
+    // If head node itself holds the key to be deleted
+    if (temp != NULL && temp->data == key) {
+        *head_ref = temp->next; // Changed head
+        free(temp); // free old head
+        return;
+    }
+ 
+    // Search for the key to be deleted, keep track of the
+    // previous node as we need to change 'prev->next'
+    while (temp != NULL && temp->data != key) {
+        prev = temp;
+        temp = temp->next;
+    }
+ 
+    // If key was not present in linked list
+    if (temp == NULL)
+        return;
+ 
+    // Unlink the node from linked list
+    prev->next = temp->next;
+ 
+    free(temp); // Free memory
+}
