@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
  
+ /**
+ 삽입 시 맨뒤에 추가할 경우에는 배열이 더 좋을 수 있지만 중간에 삽입하거나 첫 번째에 삽입하는 경우 훨씬 더 좋은 성능을 보여준다.
+ **/
 struct Node {
     int data;
     struct Node* next;
