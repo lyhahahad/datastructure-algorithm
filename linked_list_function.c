@@ -147,3 +147,54 @@ void deleteNode(struct Node** head_ref, int key)
  
     free(temp); // Free memory
 }
+
+
+// Simple C code to delete node at particular position
+ 
+#include<stdio.h>
+#include<stdlib.h>
+ 
+void insert(int );
+void display_List();
+void delete(int );
+ 
+struct node             // Structure declaration
+{
+    int data;
+    struct node *next;  // Self referral pointer
+}*head=NULL,*tail=NULL; // Initial value of Head and Tail pointer is NULL
+ 
+ 
+ //주어진 위치의 Node 삭제하기.
+void delete(int pos)
+{
+    struct node *temp = head;       // Creating a temporary variable pointing to head
+    int i;                    
+    //주어진 노드의 위치가 header일 경우 
+    if(pos==0)
+    {
+        printf("\nElement deleted is : %d\n",temp->data);
+        head=head->next;        // Advancing the head pointer
+        temp->next=NULL;
+        free(temp);             // Node is deleted
+    }
+    else
+    {
+        //제거하고자 하는 포지션의 전 포지션까지 가고 제거 포지션을 저장한 뒤 나머지 리스트를 연결한다.
+        //제거 포지션의 포인터를 저장하는 이유는 메모리를 해체하기 위함이다.
+        for(i=0;i<pos-1;i++)
+        {
+            temp=temp->next;
+        }
+        // Now temp pointer points to the previous node of the node to be deleted
+        struct node *del =temp->next;       // del pointer points to the node to be deleted
+        temp->next=temp->next->next;
+        printf("\nElement deleted is : %d\n",del->data);      
+        del->next=NULL;
+        free(del);                          // Node is deleted
+    }
+    printf("\nUpdated Linked List is : \n");
+    display_List();
+    return ;
+}
+ 
